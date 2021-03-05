@@ -1,0 +1,15 @@
+.profile-pic{
+    margin: 0px 20px;
+    width: 90%;
+    height: 90%;
+}
+
+.profile-box{
+    width: 350px;
+    background-color: white;
+    padding:20px;
+}
+
+.profile-button-margin{
+    margin: 0px 20px 0x 20px;
+}

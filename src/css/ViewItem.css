@@ -1,0 +1,28 @@
+.item-container {
+    width: 650px;
+    background-color: white;
+    padding: 5px 20px;
+}
+
+.img-lg{
+    width: 300px;
+    height: 300px;
+
+}
+
+.img-sm{
+    width: 80px;
+    height: 80px;
+}
+.img-sm-box{
+    width:100px;
+    height:100px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.user-item-container {
+    width: 750px;
+    background-color: white;
+    padding: 5px 20px;
+}

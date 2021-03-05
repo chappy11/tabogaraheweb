@@ -1,38 +1,105 @@
-.App {
+@import './css//List.css';
+@import './css/Navigation.css';
+@import './css/Home.css';
+@import './css//Account.css';
+@import './css//Profile.css';
+@import './css/ViewItem.css';
+@import './css/Garage.css';
+@import "./css//Visitgarage.css";
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.font-color-primary{
+  color: #4A0F60;
+}
+
+label{
+  margin-bottom: 1px;
+  font-size: 14px;
+}
+
+.center{
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.sidebody{
+  margin-left: 250px;
+  background-color: whitesmoke;
+  height:100vh;
+  padding:20px 30px;
+  
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.container-box{
+  padding:20px;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.circle-icon {
+  background: #ffc0c0;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 100px;
+  vertical-align: middle;
+  padding: 30px;
+  z-index: 0;
+}
+
+.profile-pic {
+  height: 200px;
+  width: 200px;
+}
+.sideuser{
+  margin-left: 250px;
+  background-color: white;
+  padding:20px 30px;
+}
+
+.mycard{
+  width: 300px;
+  height: 400px;
+  border: 1px solid whitesmoke;
+}
+.img-card{
+  width: 200px;
+  height: 200px;
+  margin-top: 5px;
+}
+.toValidate{
+  background-color:rgba(254, 254, 254, 1);
+  opacity: .4;
+}
+
+.card-body{
+  padding: 10px;
+}
+.margin-content{
+  margin-top: 100px;
+}
+.notif-container{
+    
+    border-left: 1xp solid whitesmoke;
+    border-right: 1px solid whitesmoke;
+    padding: 20px 20px;
+    margin-top: 100px;
+    height: 100%;
+    overflow-y: auto;
+    position: absolute;
+    z-index: -1;
+    left: 35%;
+    right:20%;
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  .line{
+    border: 1px solid whitesmoke;
   }
-  to {
-    transform: rotate(360deg);
+  .unread{
+   background-color: whitesmoke;
   }
-}
