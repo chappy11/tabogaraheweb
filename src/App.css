@@ -6,12 +6,29 @@
 @import './css/ViewItem.css';
 @import './css/Garage.css';
 @import "./css//Visitgarage.css";
-
+@import "./css/Message.css";
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.cat_pic {
+  width: 80px;
+  height: 80px;
+}
+
+.formcatimg{
+  width: 100px;
+  height: 100px;
+  background-color:lightgray;
+  border-radius: 50%;
+}
+.catcontainer{
+  width: 40vw;
+  height: 100%;
+  background: white;
+  padding: 15px;
 }
 
 .font-color-primary{
@@ -60,7 +77,8 @@ label{
 .sideuser{
   margin-left: 250px;
   background-color: white;
-  padding:20px 30px;
+  padding:30px 30px;
+  flex:1;
 }
 
 .mycard{
@@ -102,4 +120,24 @@ label{
   }
   .unread{
    background-color: whitesmoke;
+  }
+
+  .heading{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: 'center';
+  }
+
+  .buyerviewitem{
+    margin-top:150px;
+    width: 99vw;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .buyerviewitemcontainer{
+    width: 95%;
   }

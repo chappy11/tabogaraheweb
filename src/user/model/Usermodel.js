@@ -29,6 +29,9 @@ class Usermodel {
     myitem = (id) =>{
         return axios.get(this.url+"item/myItem/"+id);
     }
+    removeitem = (item_id) =>{
+        return axios.post(this.url + "item/updateStatus/"+ item_id +"/remove");
+    }
 
     notifCounter = (acnt_id) =>{
         return axios.get(this.url+"notif/countUnread/"+acnt_id);
@@ -63,6 +66,16 @@ class Usermodel {
         }
         return axios.post(this.url+"item/updateItem",params,{headers});
     }
+    updateItem = (fd) =>{
+        const headers = {
+            "Content-Type":"multipart/form-data"
+        }
+        return axios.post(this.url + "item/updateitem",fd,{headers});
+    }
+
+    getproductitem = (item_id) =>{
+        return axios.get(this.url + "product/getitem/"+item_id);
+    }
 
      myprofile = (user_id) => {
         return axios.get(this.url+"account/profile/"+user_id);
@@ -95,6 +108,14 @@ class Usermodel {
         }
             return axios.post(this.url+"garage/updatepic",params,{headers});
     }
+
+    updateloc = (params)=>{
+        const headers = {
+            "Content-Type":"multipart/form-data"
+        }
+        return axios.post(this.url+"garage/changeloc",params,{headers});
+       
+    }
     garagebyId = (garage_id) =>{
         return axios.get(this.url+"garage/getgarageid/"+garage_id);
     }
@@ -102,12 +123,15 @@ class Usermodel {
     activategarage = (garage_id,week) =>{
         return axios.post(this.url+"garage/postgarage/"+garage_id+"/"+week);
     }
+    deactivategarage = (garage_id) =>{
+        return axios.post(this.url+"garage/deactivategarage/"+garage_id);
+    }
 
     updategarage = (params) =>{
         const headers = {
             "Content-Type" : "text/plain"
         }
-        return axios.post(this.url+"garage/updategarage",params,{headers});
+        return axios.post(this.url+"garage/update",params,{headers});
     }
     addProduct = (params) =>{
         const headers = {
@@ -128,6 +152,7 @@ class Usermodel {
         return axios.get(this.url+"garage/allgarage/"+id);
     }
     
+
 
 }
 

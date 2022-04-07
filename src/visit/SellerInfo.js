@@ -1,10 +1,14 @@
-import React from 'react'
-import { Avatar, Dialog, DialogActions, DialogContent, DialogTitle, List, ListItemAvatar, ListItemText } from '@material-ui/core'
-import {ServerUrl as url} from '../ServerUrl';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBirthdayCake, faEnvelope, faMapMarker, faPhoneAlt, faRing, faVenusMars } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Dialog, DialogActions, DialogContent, DialogTitle } from '@material-ui/core';
+import React,{useState,useEffect} from 'react';
+import { ServerUrl as url } from '../ServerUrl';
+import model from '../user/model/Usermodel';
 function SellerInfo({openinfo,setopeninfo,user}) {
+    const id = JSON.parse(localStorage.getItem("user")).id;
+
     return (
+        
         <div>
             <Dialog open={openinfo} onClose={()=>setopeninfo(!openinfo)} fullWidth={true}>
                 <DialogTitle>Seller Information</DialogTitle>

@@ -24,7 +24,7 @@ function ListAdmin({admins}) {
                 <td className="text-center"><a href={`/viewadmin/${val.acnt_id}`} className="btn btn-link">{val.email}</a></td>
                 <td className="text-center">{val.username}</td>
                 <td className={val.status==="active" ? "text-success center": "text-danger center"}>{val.status}</td>
-                <td>{val.status==="active" ? (<button className="btn btn-outline-danger"> <FontAwesomeIcon icon={faUserTimes} />{" "}deactivate</button>) : (<button className="btn btn-outline-success"> <FontAwesomeIcon icon={faUserCheck }/>{" "}activate</button>)}</td>  
+                <td>{val.status==="active" ? (<button className="btn btn-outline-danger btn-sm"> <FontAwesomeIcon icon={faUserTimes} />{" "}deactivate</button>) : (<button className="btn btn-outline-success btn-sm"> <FontAwesomeIcon icon={faUserCheck }/>{" "}activate</button>)}</td>  
             </tr>
           ))}
       </tbody>

@@ -1,7 +1,7 @@
 import React from 'react'
 import {ServerUrl as url} from '../../ServerUrl';
 function Listp({product}) {
-    console.log(product);
+    
     return (
         <div className="row">
             {product.map((val,index)=>(
@@ -11,7 +11,7 @@ function Listp({product}) {
                             <div className="product-info">
                             <div style={{lineHeight:"1.2"}} className="product-price"><span >&#x20B1;</span> {val.sellprice}</div>
                             <div style={{lineHeight:"1.2"}}>{val.item_name.slice(0,22)}</div>
-
+                            <p className="text-danger">{val.item_quantity==0 && "Out of stock"}</p>
                             </div>
                         </div>
                         

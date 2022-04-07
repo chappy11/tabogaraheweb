@@ -18,7 +18,6 @@ function ProfilePic({user,btnupdate,isupdate,onChange,save}) {
   })
   const clear = () =>{
     setTimeout(() => {
-   
       setmessage({
         msg:"",
         msgclas:""

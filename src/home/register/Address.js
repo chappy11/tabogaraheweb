@@ -53,7 +53,7 @@ function Address({dats,updatecount,count,setdat,onback}) {
             clear();
         }else{
             setmessage({
-                msg:"Completed",
+                msg:"Successfully Save",
                 msgclas:mess[0]
             })
             setdat(data);

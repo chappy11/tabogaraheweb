@@ -1,5 +1,6 @@
 import React from 'react'
 import {Dialog,DialogTitle,DialogContent,DialogActions} from "@material-ui/core";
+import Notifbutton from './Notifbutton';
 function CheckNotif({notf,open,handleclose}) {
     const store = JSON.parse(localStorage.getItem("user"));
     return (
@@ -8,9 +9,10 @@ function CheckNotif({notf,open,handleclose}) {
                 <DialogTitle>Notification</DialogTitle>
                 <DialogContent>
                     <p>Dear {store.fname+" "+store.lname}</p>
-                    <p>We would like to infor you that</p>
-                    <p>{notf.notif_body}</p>
+                    <p>We would like to inform you that {" " +notf.notif_body}</p>
                 </DialogContent>
+                <DialogActions>
+                </DialogActions>
             </Dialog>            
         </div>
     )

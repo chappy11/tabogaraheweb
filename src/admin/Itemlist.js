@@ -59,8 +59,8 @@ function Itemlist() {
                         <thead>
                             <tr>
                                 <th className="text-center"></th>
-                                <th className="text-center font-color-primary">Item Name</th>
-                                <th className="text-center font-color-primary">Item Qauntity</th>
+                                <th className="text-center font-color-primary">Name</th>
+                                <th className="text-center font-color-primary">Quantity</th>
                                 <th className="text-center font-color-primary">Owner</th>
                                 <th className="text-center fonnt-color-primary">Action</th>
                             </tr>

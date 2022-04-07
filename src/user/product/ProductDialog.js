@@ -23,7 +23,8 @@ function ProductDialog({open,item,setopen,handleclose}) {
             acnt_id:id
         }
         model.addProduct(data).then(res=>{
-                if(res.data.status===1){
+                console.log(res)
+            if(res.data.status===1){
                     setmessage({msg:res.data.message,cName:mess[0]});
                     setTimeout(() => {
                         setmessage({msg:"",cName:""});
@@ -46,7 +47,6 @@ function ProductDialog({open,item,setopen,handleclose}) {
     return (
         <div>
             <Dialog fullWidth={true} open={open} onClose={handleclose}>
-                <DialogTitle>Sell this Item</DialogTitle>
                    <DialogContent>
                         <p className={message.cName}>{message.msg}</p>
                         <div className="row">
@@ -56,7 +56,7 @@ function ProductDialog({open,item,setopen,handleclose}) {
                                 <img src={url+itm.item_pic3} alt={itm.item_pic3} className="img-card"/>
                             </div>
                             <div className="col-md-6">
-                                <div className="row">
+                                <div className="row pt-4">
                                     <div className="col-md-5">
                                         <p>Name</p>
                                     </div>
@@ -82,13 +82,22 @@ function ProductDialog({open,item,setopen,handleclose}) {
                                 </div>
                                 <div className="form-group">
                                     <label>Sell Price</label>
-                                    <input type="number" className="form-control" name="sellprice" onChange={onChange}/>
+                                    <div className="row">
+                                        <div className="col">
+                                             <input type="number" className="form-control" name="sellprice" onChange={onChange}/>
+                                        </div>
+                                        <div className="col">
+                                            <p className="text-secondary">each {itm.item_unit}</p>
+                                        </div>
+                                    
+                                    </div>
+                                    
                                 </div>
                                 <div className="form-group">
-                                    <label>Sell type</label>
+                                    {/* <label>Sell type</label> */}
                                     <select className="form-control" name="selltype" onChange={onChange}>
-                                        <option>choose</option>
-                                        <option value="negotiable">Negotiable</option>
+                                        <option>Sell Type</option>
+                                        <option value="Bid">Bidding</option>
                                         <option value="fixed">Fixed</option>
                                     </select>
                                 </div>

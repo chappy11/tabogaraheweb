@@ -44,7 +44,7 @@ function AddProduct({garage_id}) {
                         <tr key={idx}>
                             <td><img src={url+val.item_pic1} alt={val.item_pic1} className="tbl-img rounded-circle"/></td>
                             <td><a href={`/uviewitem/${val.item_id}`}>{val.item_name}</a></td>
-                            <td>{val.item_orig_price}</td>
+                            <td>{"\u20B1 "+ parseInt(val.item_orig_price).toFixed(2) }</td>
                             <td>{val.item_quantity+" "+val.item_unit}</td>
                             <td><button className="btn btn-primary" onClick={()=>window.location.pathname="/uviewitem/"+val.item_id}>Check item</button></td>
                         </tr>

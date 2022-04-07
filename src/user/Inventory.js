@@ -1,9 +1,10 @@
-import React,{useState,useEffect} from 'react'
+import React, { useEffect, useState } from 'react';
+import { ServerUrl as url } from '../ServerUrl';
 import AddInventory from './inventory/AddInventory';
-import Usersidenav from './navigation/Usersidenav'
-import Utopnav from './navigation/Utopnav'
+import Additem from './inventory/Additem';
 import model from './model/Usermodel';
-import {ServerUrl as url} from '../ServerUrl';
+import Usersidenav from './navigation/Usersidenav';
+import Utopnav from './navigation/Utopnav';
 function Inventory() {
     const [isLoad, setisLoad] = useState(false);
     const [showMess, setshowMess] = useState(false);
@@ -13,7 +14,7 @@ function Inventory() {
     useEffect(() => {
     getItem();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoad]);
+    }, []);
     const getItem = ()=>{
            let inter = setInterval(() => {
                model.myitem(id).then(res=>{
@@ -25,42 +26,41 @@ function Inventory() {
                         setitem([]);
                     }
                })
-           }, 3000); 
+           }, 1000); 
            return inter;
         }
     
     return (
-        <div>
+        <>
             <Utopnav/>
-            <Usersidenav/>
-         
+            <Usersidenav/>         
             <div className="sideuser">
-                <div className="margin-content">
-                <div className="d-flex">
-                    <div className="mr-auto p-2"><h3 className="p-2">Inventory</h3></div>
-                    <div className="p-2"><AddInventory setisLoad={setisLoad} /></div>
+                <div className="margin-content">        
+                <div className="heading">
+                    <h1 className="  lead"></h1>
+                    <Additem/>
                 </div>
                 {showMess ? (<p className="text-danger center">No Item</p>):""}
-                <div className="row">
-                {item.map((val,i)=>(
-                    <div key={i} className="col-sm-3" >
-                        <div className={val.item_status==="validated" ? "product_card mx-auto shadow-lg ":"product_card mx-auto shadow-lg toValidate"} onClick={()=> val.item_status==="toValidate" ? "":window.location.pathname="/uviewitem/"+val.item_id}>
-                           <img src={url+val.item_pic1} alt={val.item_pic1} className="product_pic mx-auto d-block"/>
-                            <div className="product-info">
-                              
-                                {val.item_status!=="toValidate" ? (
-                                    <>
-                                      <div className="product-price">{val.item_name}</div>      
-                                    </>
-                                ):(<p className="text-center text-info">This item is currently not accpeted by the admin pls wait</p>)}
+                <div className="row mt-3">
+                    {item.map((val,i)=>(
+                        <div key={i} className="col-sm-3" >
+                            <div className={val.item_status==="validated" ? "product_card mx-auto shadow-lg ":"product_card mx-auto shadow-lg "} onClick={()=> window.location.pathname="/uviewitem/"+val.item_id}>
+                            <img src={url+val.item_pic1} alt={val.item_pic1} className={val.item_status==="validated" ? "product_pic mx-auto d-block":"product_pic mx-auto d-block toValidate"}/>
+                                <div className="product-info">
+                                
+                                    {val.item_status!=="toValidate" ? (
+                                        <>
+                                        <div className="product-price">{val.item_name}</div>      
+                                        </>
+                                    ):(<p className="text-center text-danger" style={{fontSize:14}}>Note: The approval of the item is on process</p>)}
+                                </div>
                             </div>
                         </div>
+                    ))}
+                    </div> 
                     </div>
-                ))}
-                </div>
-                </div>
-            </div>
-        </div>
+                    </div>
+      </>
     )
 }
 

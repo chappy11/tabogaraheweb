@@ -11,7 +11,7 @@ export const Usernavdata = [
     },
     {
         title:"" ,
-        url:"/userinventory",
+        url:"/myprofile",
         cName:"usr-li"
     },
     {
@@ -26,7 +26,7 @@ export const Usernavdata = [
     },
     {
         title:<FontAwesomeIcon icon={faEnvelope}/> ,
-        url:"/nofication",
+        url:"/message/"+0,
         cName:"usr-li"
     },
     

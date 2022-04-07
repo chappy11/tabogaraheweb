@@ -3,12 +3,14 @@ import {useParams} from 'react-router-dom';
 import model from './model/AdminModel';
 import Asidebar from './navigation/Asidebar'
 import Atopnav from './navigation/Atopnav'
+import {useHistory} from 'react-router-dom';
 import {ServerUrl as url} from '../ServerUrl';
 function CheckItem() {
     const {item_id,user_id} = useParams();
     const [item, setitem] = useState({})
     const [imglg, setimglg] = useState("");
     const [imgs, setimgs] = useState([])
+    const history = useHistory();
     useEffect(() => {
     const getdata = async()=>{
            const data = await model.viewItem(item_id).then(res=>{
@@ -92,12 +94,7 @@ function CheckItem() {
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="col-sm-4">
-                                    <button className="btn btn-success ">accept</button>
-                                </div>
-                                <div className="col-sm-4">
-                                    <button className="btn btn-danger">decline</button>
-                                </div>
+                                    <button className="btn btn-danger" onClick={()=>history.goBack()}>Back</button>
                             </div>
                         </div>
                     </div>

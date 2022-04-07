@@ -8,7 +8,6 @@ function Admin() {
            <Asidebar/>
            <Atopnav/>
             <div className="sidebody">
-                Hello World
             </div>
         </div>
     )

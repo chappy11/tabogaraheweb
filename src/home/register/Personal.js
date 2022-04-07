@@ -48,7 +48,7 @@ function Personal({setdat,updatecount,count,onback,dats}) {
             clear();
         }else{
             setmessage({
-                msg:"Completed..",
+                msg:"Successfully Save",
                 msgclas:mess[0]
             })
             setdat(data);
@@ -80,7 +80,7 @@ function Personal({setdat,updatecount,count,onback,dats}) {
             <div className="row">
                 <div className="col-md-6">
                     <div className="form-group">
-                        <label className="text-info">Gender</label>
+                        <label className="text-info">Sex</label>
                         <select className="form-control" name="gender" onChange={onChange}>
                             <option value=" ">Choose</option>
                             <option value="Male">Male</option>

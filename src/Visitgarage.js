@@ -1,13 +1,14 @@
-import React from 'react'
-import Utopnav from './user/navigation/Utopnav'
-import Visitheader from './visit/Visitheader'
-import {useParams} from 'react-router-dom';
-import Productlist from './visit/Productlist';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import Utopnav from './user/navigation/Utopnav';
 import Mycart from './visit/Mycart';
+import Productlist from './visit/Productlist';
+import Visitheader from './visit/Visitheader';
 function Visitgarage() {
     const {garage_id} = useParams();
+   
     return (
         <div>
             <Utopnav/>
@@ -16,7 +17,7 @@ function Visitgarage() {
                                                        <div className="mt-3">
                             <div className="row mb-3">
                                 <div className="col-md-8">
-                                <Visitheader garage_id={garage_id}/>
+                                <Visitheader garage_id={garage_id}  />
 
                                     <Productlist garage_id={garage_id}/>
                                 </div>

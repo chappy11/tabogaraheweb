@@ -19,7 +19,7 @@ function Garage() {
             if(res.data.count > 0){
                 setopen(true);
             }else{
-                setmessage("You Cannot create garage if you dont have item in your inventory")
+                setmessage("You cannot create garage if you dont have item in your inventory")
                 setTimeout(() => {
                     setmessage();
                 }, 5000);
@@ -35,8 +35,11 @@ function Garage() {
             if(res.data.status===1){
                 sethavegarage(true);
                 setmygarage(res.data.data[0])
-                getproduct(res.data.data[0].garage_id);
-            }else{
+              setInterval(() => {
+                    getproduct(res.data.data[0].garage_id);
+    
+                }, 1000);
+                            }else{
                 sethavegarage(false);
                 setmygarage([]);
             }
@@ -45,6 +48,7 @@ function Garage() {
     const getproduct = (garage_id) =>{
         model.viewProduct(garage_id).then(res=>{
             if(res.data.status===1){
+                
                 setisEmpty(false);
                 setproduct(res.data.data);
             }else{
@@ -64,6 +68,16 @@ function Garage() {
         });
     }
     
+    const deactivate = (e) =>{
+        e.preventDefault();
+        model.deactivategarage(mygarage.garage_id).then(res=>{
+            if(res.data.status===1){
+                setisload(!isload);
+            }else{
+                alert(res.data.message);
+            }
+        })
+    }
     
     return (
         <div>
@@ -74,11 +88,11 @@ function Garage() {
                 {open ? (<CreateGarage setopen={setopen} handleclose={handleclose}/>):(
                 <>
                     {havegarage ? (
-                        <Mygarage setload={setisload} garage={mygarage} product={product} activate={activate}/>
+                        <Mygarage setload={setisload} garage={mygarage} product={product} deactivate={deactivate} activate={activate}/>
                     ):(
                         <>
                              <div className="garage-container shadow">
-                                  <p className="animate__animated animate__fadeInDown center text-warning">{message}</p>
+                                  <p className="animate__animated animate__fadeInDown center text-danger">{message}</p>
                                         <div className="d-flex">    
                                              <div className="mr-auto p-2">
                                                  <h4>Your Garage</h4>

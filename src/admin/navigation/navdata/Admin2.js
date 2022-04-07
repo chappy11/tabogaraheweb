@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBoxOpen, faHome, faUserAlt } from "@fortawesome/free-solid-svg-icons";
+import { faBoxOpen, faHome, faList, faUserAlt } from "@fortawesome/free-solid-svg-icons";
 
 export const Admin2 = [
     
@@ -17,6 +17,11 @@ export const Admin2 = [
             title:"Items",
             icon:<FontAwesomeIcon icon={faBoxOpen}/>,
             link:"/itemlist"
+        },
+        {
+            title:"Categories",
+            icon:<FontAwesomeIcon icon={faList}/>,
+            link:"/catgdata"
         }
  
 ]

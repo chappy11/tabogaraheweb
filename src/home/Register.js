@@ -81,7 +81,7 @@ function Register({signIn}) {
         }
         else{
           setmessage({
-            msg:<FontAwesomeIcon icon={faCircleNotch} spin/>+"Successfully Register...",
+            msg:"Successfully Register",
             msgclas:mess[0]
           })
           setTimeout(() => {

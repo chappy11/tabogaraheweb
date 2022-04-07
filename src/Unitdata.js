@@ -1,1 +1,1 @@
-export const Unitdata = ["","pcs","pair","collection"];
+export const Unitdata = ["piece","pair","collection"];

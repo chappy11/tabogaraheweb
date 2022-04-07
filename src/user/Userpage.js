@@ -6,19 +6,27 @@ import {ServerUrl as url} from '../ServerUrl';
 function Userpage() {
     const id = JSON.parse(localStorage.getItem("user")).id;
     const [garages, setgarages] = useState([]);
-
+    const [isload, setisload] = useState(false);
     useEffect(() => {
-        getgarages();
+        setInterval(() => {
+            getgarages();    
+        }, 2000);
+        setisload(true);
     }, [])
     const getgarages = () =>{
         model.allgarages(id).then(res=>{
-            setgarages(res.data.data)
+          //  console.log(res);            
+            if(res.data.status===1){
+                setgarages(res.data.data);
+            }else{
+                
+            }
         })
     }
     
     return (
         <div>
-             <BuyerSidebar/>
+             <BuyerSidebar isload={isload}/>
              <Utopnav/>
 
             <div className="categoryside">
@@ -30,8 +38,8 @@ function Userpage() {
                                     <img src={url+val.garage_photo} alt={garages.garage_photo} className="img-card mx-auto d-block"/>
                                     <div className="card-body">
                                         <p className="text-center lead">{val.garage_name}</p>
-                                        <p style={{fontSize:"12px"}} className="center">own by: {val.firstname+" "+val.lastname}</p>
-                                        <p style={{fontSize:"12px"}} className="center">Start/end: {val.date_start+" / "+val.date_end}</p>
+                                        <p style={{fontSize:"15px"}} className="center">Owned by : {val.firstname+" "+val.lastname}</p>
+                                        <p style={{fontSize:"15px"}} className="center">Start/end: {val.date_start+" / "+val.date_end}</p>
                                         <a href={`/visitgarage/${val.garage_id}`} className="btn btn-outline-primary btn-block float-bottom">Visit garage</a>
                                     </div>
                                 </div>

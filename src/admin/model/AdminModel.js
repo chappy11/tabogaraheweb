@@ -66,6 +66,16 @@ class AdminModel{
         return axios.post(this.url+"notif/createNotif",params,{headers});
     }
 
+    getcategory = () =>{
+        return axios.get(this.url+"category/categories");
+    }
+
+    addcat = (params) =>{
+        const headers={
+            "Content-Type":"multipart/form-data"
+        }
+        return axios.post(this.url+"category/addcat",params,{headers});
+    }
   
 }
 

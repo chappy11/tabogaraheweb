@@ -1,11 +1,11 @@
-import React, { useState,useEffect } from 'react'
-import Updatemap from '../../map/Updatemap'
-import Usersidenav from '../navigation/Usersidenav'
-import Utopnav from '../navigation/Utopnav'
-import {useHistory,useParams} from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
+import { Barangay as bgy } from '../../Barangay';
+import { Message as mess } from '../../Message';
+import { ServerUrl as url } from '../../ServerUrl';
 import model from '../model/Usermodel';
-import {ServerUrl as url} from '../../ServerUrl';
-import {Message as mess} from  '../../Message';
+import Usersidenav from '../navigation/Usersidenav';
+import Utopnav from '../navigation/Utopnav';
 function Updategarage() {
     const {garage_id} = useParams();
     const history = useHistory();
@@ -15,15 +15,21 @@ function Updategarage() {
     const [preview, setpreview] = useState("");
     const [isload, setisload] = useState(false);
     const [img, setimg] = useState(null);
+    const [locprev, setlocprev] = useState(null);
+    const [locpic, setlocpic] = useState(null);
     const [message, setmessage] = useState({msg:"",cName:""});
     const [updatedata, setupdatedata] = useState({
         name:"",
-        desc:"",
+        sitio:"",
+        brgy:"",
         week:""
     })
     useEffect(() => {
         getdata();
         setpreview(url+garage.garage_photo);
+        if(garage.garage_loc!=null){
+            setlocprev(url+garage.garage_loc);
+        }
         setposition({lat:garage.lat,lng:garage.lng});
     }, [isload])
 
@@ -38,6 +44,10 @@ function Updategarage() {
         setpreview(URL.createObjectURL(e.target.files[0]));
         setimg(e.target.files[0]);
     }
+    const locimg = (e) =>{
+        setlocprev(URL.createObjectURL(e.target.files[0]));
+        setlocpic(e.target.files[0]);
+    }
     const handlemap = () =>{
         setposition({lat:garage.lat,lng:garage.lng});
         setmymap(!mymap);
@@ -49,10 +59,9 @@ function Updategarage() {
         const data = {
             id:garage_id,
             name:updatedata.name==="" ? garage.garage_name : updatedata.name,
-            desc:updatedata.desc==="" ? garage.garage_description : updatedata.desc,
+            sitio:updatedata.sitio==="" ? garage.garage_sitio : updatedata.sitio,
+            brgy:updatedata.brgy==="" ? garage.garage_brgy : updatedata.brgy,
             week:updatedata.week==="" ? garage.week:updatedata.week,
-            lat:position.lat,
-            lng:position.lng
         }
             model.updategarage(data).then(res=>{
                 if(res.data.status===1){
@@ -110,31 +119,60 @@ function Updategarage() {
         }
         
     }
-    
+    const updateloc = () =>{
+        if(locpic==null){
+            setmessage({msg:"Please put an image",cName:mess[1]});
+            setTimeout(() => {
+                setmessage({msg:"",cName:""})
+            }, 5000);
+        }else{
+            let f = new FormData();
+            f.append("id",garage_id);
+            f.append("pic",locpic,locpic.name);
+            model.updateloc(f).then(res=>{
+                if(res.data.status===1){
+                    setmessage({msg:res.data.message,cName:mess[0]})
+                    setTimeout(() => {
+                        setmessage({msg:"",cName:""})
+                    }, 5000);
+                }else{
+                    setmessage({msg:res.data.message,cName:mess[1]});
+                    setTimeout(() => {
+                        setmessage({msg:"",cName:""})
+                    }, 5000);
+            
+                }
+            })
+        }
+    }
     return (
         <div>
             <Utopnav/>
             <Usersidenav/>
             <div className="sideuser">
-                    
+                    <div className="row justify-content-center">
                     <div className="row g-margin">
                         <div className="col-md-4">
                             <img src={preview} alt={garage.garage_photo} className="profile-pic rounded-circle mx-auto d-block"/>
                             <div className="form-group">
                                 <input type="file" className="form-control" onChange={updateimg}/>    
-                                <button className="btn btn-primary" onClick={updatepic}>update picture</button>
+                                <button className="btn btn-primary btn-block mt-3" onClick={updatepic}>Update Picture</button>
                             </div>
-                            <p className={message.cName}>{message.msg}</p>
+                            <h5 className="mt-4">Screenshot of Location</h5>
+                            <img src={locprev} alt={garage.garage_loc} className="loc_pic d-flex mx-auto"/>                  
+                            <input type="file" className="form-control mt-3" onChange={locimg}/>
+                            <buttton className="btn btn-primary btn-block mt-3" onClick={updateloc}>Save</buttton>
+                        </div>
 
-                            <div className="form-group">
+                    <div className="col-md-8">
+                        <div className="g-container">
+                  
+                    <h3>Garage Information</h3>
+                    <div className="form-group">
                                <label>Name</label>
                                 <input className="form-control" name="name" onChange={onChange} placeholder={garage.garage_name}/>
                             </div>
-                             
-                            <div className="form-group">
-                                <label>Description</label>
-                                <textarea placeholder={garage.garage_description} name="desc" onChange={onChange} row="8" className="form-control"/>
-                            </div>
+                            
                             <div className="form-group">
                                 <label>Duration</label>
                                 <select className="form-control" name="week" onChange={onChange}>
@@ -145,20 +183,24 @@ function Updategarage() {
                                     <option value="4">4 week</option>
                                 </select>
                             </div>
+                            <div className="form-group">
+                                <textarea className="form-control" name="sitio"  onChange={onChange} placeholder={garage.garage_sitio}/>
+                            </div>
+                            <div className="form-group">
+                                <select className="form-control" name="brgy" onChange={onChange}>
+                                    {bgy.map((val,i)=>(
+                                        <option value={val} key={i}>{i===0 ? garage.garage_brgy : val}</option>
+                                    ))}
+                                </select>
+                            </div>
                             
-                            <p>lat: {position.lat}</p>
-                            <p>lng: {position.lng}</p>
-                            <button className="btn btn-outline-secondary" onClick={handlemap}>open map</button> 
-                            <br></br>
-                            <button className="btn btn-primary float-left mt-3 ml-3" onClick={update}>Update</button>
-                            <button className="btn btn-danger float-right mt-3 mr-3" onClick={()=>history.goBack()}>Back</button>
-                        </div>
-
-                    <div className="col-md-8">
-                        {mymap ?(<Updatemap post={[position.lat,position.lng]} setmarker={setposition}/>):null
-
-                        }
-                        
+                            <div className="row justify-content-end mr-3">
+                            <button className="btn btn-primary mr-3" onClick={update}>Update</button>
+                            <button className="btn btn-danger   " onClick={()=>window.location.pathname="/mygarage"}>Back</button>
+                            </div>
+                            <p className={message.cName}>{message.msg}</p>
+                            </div>  
+                    </div>
                     </div>
                     </div>
             </div>

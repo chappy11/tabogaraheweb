@@ -28,6 +28,18 @@ import Visitgarage from "./Visitgarage";
 import ViewProduct from "./visit/ViewProduct";
 import Order from "./order/Order";
 import Negotiable from "./negotiable/Negotiable";
+import BuyerViewOrder from "./buyer/BuyerViewOrder";
+import Chat from "./message/Chat";
+import SalesReport from "./visit/SalesReport";
+import Returnitem from "./order/Returnitem";
+import Itemreturn from "./buyer/Itemreturn";
+import CategoryData from "./admin/profile/CategoryData";
+import Sample from "./Sample";
+import ViewOrderInfo from "./buyer/ViewOrderInfo";
+import Vieworder from "./order/Vieworder";
+import Groups from "./visit/Groups";
+import Members from "./visit/Members";
+
 function App() {
   return (
     <Router>
@@ -47,9 +59,12 @@ function App() {
           <Route path="/viewuser/:id" component={ViewUser}/>
           <Route path="/checkitem/:item_id/:user_id" component={CheckItem}/>
           <Route path="/decline/:item_id/:user_id" component={Decline}/>
+          <Route path="/catgdata" component={CategoryData}/>
+          
           {/* user page */}
           <Route path="/userinventory" component={Inventory}/>
           <Route path="/logout" component={Logout}/>
+          <Route path="/payment/:order_id" component={Sample}/>
           <Route path="/notification" component={Notif}/>
           <Route path="/uviewitem/:item_id" component={UviewItem}/>
           <Route path="/myprofile" component={Myprofile}/>
@@ -61,6 +76,16 @@ function App() {
           <Route path="/viewproduct/:product_id" component={ViewProduct}/>
           <Route path="/negotiable" component={Negotiable} />
           <Route path="/order" component={Order}/>
+          <Route path="/orderreq/:order_id" component={Vieworder}/>
+          <Route path="/groups" component={Groups}/>
+          <Route path="/member/:group_id" component={Members}/>
+          <Route path="/myorder" component={BuyerViewOrder}/>
+          <Route path="/orderinfo/:order_id" component={ViewOrderInfo}/>
+          <Route path="/message/:chat_id" component={Chat}/>
+          <Route path="/salesreport" component={SalesReport}/>
+          <Route path="/returnitem" component={Returnitem}/>
+          <Route path="/itemreturn" component={Itemreturn}/>
+         
         </Switch>
       </div>
     </Router>

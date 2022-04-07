@@ -3,6 +3,7 @@ import {useParams,useHistory} from "react-router";
 import React from 'react'
 import markerIconPng from "leaflet/dist/images/marker-icon.png"
 import { MapContainer,TileLayer, Marker, Popup } from "react-leaflet";
+
 function Viewmap() {
     const {lat,lng} = useParams();
     const position = [lat,lng];

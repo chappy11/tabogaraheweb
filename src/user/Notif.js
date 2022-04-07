@@ -20,6 +20,7 @@ function Notif() {
     }, [isload])
     const getNotif = () =>{
         model.getnotif(stor.id).then(res=>{
+            console.log(res);
             if(res.data.status===1){
                 setnotif(res.data.data);
                 setnoNotif(false)
@@ -66,16 +67,18 @@ function Notif() {
    
     return (
         <div>
+            <CheckNotif open={open} handleclose={handleclose} notf={notf}/>
             <Utopnav/>
             <Usersidenav/>
-            <CheckNotif open={open} handleclose={handleclose} notf={notf}/>
+          
             <div className="sideuser">
-                    <div className="notif-container mx-auto shadow">
+            
+                  <div className="margin-content">
                     <div className="d-flex">
                     <div className="mr-auto p-2"><h4 className="p-2">Notification</h4></div>
-                    <div className="p-2" ><button onClick={readall} className="btn btn-link"><FontAwesomeIcon icon={faCheckCircle}/>Mark all read</button></div>
-                    <div className="p-2"><button onClick={removeall} className="btn btn-danger"><FontAwesomeIcon icon={faTrashAlt}/>{" "}remove</button></div>
-                </div>               
+                    <div className="p-2" ><button onClick={readall} className="btn btn-link"><FontAwesomeIcon icon={faCheckCircle}/>Mark all as read</button></div>
+                    <div className="p-2"><button onClick={removeall} className="btn btn-danger"><FontAwesomeIcon icon={faTrashAlt}/>{" "}Remove</button></div>
+                    </div>               
                     <div className="line"></div>
                         <List>
                             {notif.map((val,i)=>(
@@ -113,7 +116,7 @@ function Notif() {
                         </List>
                     </div>
             </div>
-        </div>
+        // </div>
     )
 }
 

@@ -11,7 +11,7 @@ function GetProduct({garage_id,open,product}) {
                         <div className="product_card mx-auto shadow-lg">
                             <img src={url+val.item_pic1} alt={val.item_pic1} className="product_pic mx-auto d-block"/>
                             <div className="product-info">
-                                <div className="product-price" style={{lineHeight:"1.2"}}>{val.sellprice}</div>
+                                <div className="product-price" style={{lineHeight:"1.2"}}>{"\u20B1 " +parseInt(val.sellprice).toFixed(2) }</div>
                                 <div style={{lineHeight:"1.2"}}>{val.item_name}</div>
                                  {/* eslint-disable-next-line eqeqeq */}
                                 <div  className={val.item_quantity==0 ? "text-danger":""} style={{lineHeight:"1.2"}}>{val.item_quantity==0 ? "Out of stock":null}</div>

@@ -3,45 +3,49 @@ import Usersidenav from '../user/navigation/Usersidenav'
 import Utopnav from '../user/navigation/Utopnav'
 import model from '../buyer/model/Buyer_Model';
 import {ServerUrl as url} from '../ServerUrl';
+import NegotiableModel from './NegotiableModel';
+import NegotiableDialog from './NegotiableDialog';
 function Negotiable() {
     const id = JSON.parse(localStorage.getItem("user")).id;
     const [data, setdata] = useState([]);
-
+    const [pakyaw_id, setpakyaw_id] = useState("");
+    const [open, setopen] = useState(false);
+    const [info, setinfo] = useState({});
+    
     useEffect(() => {
         setInterval(() => {
             getdata();
         }, 2000);
     }, [])
     const getdata = () =>{
-        model.viewrequest(id).then(res=>{
+        NegotiableModel.pakyaw(id).then(res=>{
             if(res.data.status===1){
                 setdata(res.data.data);
             }else{
-
+                setdata([]);
             }
         })
     }
 
-    const accept = (neg_id) =>{
-        
-        model.acceptnego(neg_id).then(res=>{
-            let filt = data.filter(res => res.nego_id !== neg_id);
-            setdata(filt);
-        })
+    const accept = (pakyaw_id,info) =>{
+        setopen(true)
+        setpakyaw_id(pakyaw_id)
+        setinfo(info);
     }
+
+
     return (
         <div>
             <Utopnav/>
             <Usersidenav/>
             <div className="sideuser">
                 <div className="margin-content">
-                    Price request
+                    <NegotiableDialog pakyaw_id={pakyaw_id} open={open} setopen={setopen} info={info}/>
                     <table className="table table-borderless">
                         <thead>
                             <tr>
                                 <th>Buyer</th>
-                                <th>Item</th>
-                                <th>Sellprice</th>
+                                <th>Total Amount</th>
                                 <th>Request Price</th>
                                 <th>Action</th>
                             </tr>
@@ -54,17 +58,13 @@ function Negotiable() {
                                          {val.firstname+" "+val.mi+" "+val.lastname}
                                     </td>
                                     <td>
-                                        <img src={url+val.item_pic1} alt={val.item_pic1} className="tbl-img rounded-circle"/>
-                                        {val.item_name}
+                                        {"\u20B1 " +parseInt(val.amount).toFixed(2)}
                                     </td>
                                     <td>
-                                        {val.sellprice}
+                                        {"\u20B1" +parseInt(val.total_amount).toFixed(2) }
                                     </td>
                                     <td>
-                                        {val.neg_price}
-                                    </td>
-                                    <td>
-                                        <button className="btn btn-success btn-sm" onClick={()=>accept(val.nego_id)}>accept</button>
+                                        <button className="btn btn-primary btn-sm" onClick={()=>accept(val.pakyaw_id,val)}>View</button>
                                     </td>
                                 </tr>
                             ))}

@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import model from './model/HomeModel';
 import {Message as msgclass} from '../Message';
-
+import axios from "axios";
+import {CardElement,Elements,useElements,useStripe} from '@stripe/react-stripe-js';
+import { loadStripe } from "@stripe/stripe-js";
 function Login() {
   const [data, setdata] = useState({
     email: "",
     password: "",
   });
+  const [ispay, setispay] = useState(false);  
   const [message, setmessage] = useState({
       clas:"",
       msg:""
@@ -15,6 +18,8 @@ function Login() {
     setdata({ ...data, [e.target.name]: e.target.value });
   };
 
+  
+ 
   const login=(e)=>{
     if(data.email==="" || data.password===""){
         setmessage({
@@ -67,17 +72,17 @@ function Login() {
   return (
     <div className="animate__animated animate__fadeInRight">
         
-      <div className="form-group">
+       <div className="form-group">
         
-        <div className="login-margin">
-        <p className={message.clas}>{message.msg}</p>
-          <div className="form-group">
-            <label className="text-info">Email</label>
-            <input
-              type="text"
-              name="email"
-              className="form-control"
-              placeholder="Enter your Email"
+      <div className="login-margin">
+         <p className={message.clas}>{message.msg}</p>
+           <div className="form-group">
+             <label className="text-info">Email</label>
+             <input
+               type="text"
+               name="email"
+               className="form-control"
+               placeholder="Enter your Email"
               onChange={onChange}
             />
           </div>
@@ -91,8 +96,8 @@ function Login() {
               onChange={onChange}
             />
           </div>
-          <button onClick={login} className="btn btn-primary">Sign in</button>
-        </div>
+          <button className="btn btn-primary" onClick={login}>Sign in</button>        
+            </div>
       </div>
     </div>
   );

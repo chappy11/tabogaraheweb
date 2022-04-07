@@ -4,15 +4,21 @@ import Listp from './productlist/Listp';
 function Productlist({garage_id}) {
     const [productlist, setproductlist] = useState([]);
     useEffect(() => {
-        getproductlist();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        setInterval(() => {
+            getproductlist();
+        
+        }, 1000);
+        
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     const getproductlist = () =>{
         usermodel.availableproduct(garage_id).then(res=>{
-            setproductlist(res.data.data);
+            console.log(res);
+            if(res.data.status===1){
+               setproductlist(res.data.data);
+            }
         })
     }
-    
     return (
         <div className="mt-3">
             <Listp product={productlist}/>

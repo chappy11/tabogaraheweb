@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Dialog, DialogActions, DialogContent, DialogTitle } from "@material-ui/core";
 import {Unitdata as un} from "../../Unitdata";
-import {Categorydata as ct} from "../../Categorydata";
+import Category from "../../Categorydata";
 import {Message as mess} from '../../Message';
 import model from '../model/Usermodel';
 export class AddInventory extends Component {
@@ -21,6 +21,7 @@ export class AddInventory extends Component {
             descp:"",
             catg:"",
             prc:"",
+            cond:"",
             unt:"",
             qty:"",
             message:{
@@ -45,6 +46,7 @@ export class AddInventory extends Component {
        
         this.setState({open:false})
         this.props.setisLoad(false);
+        this.fileArray = [];
     }
     getImage = (e) =>{
         this.fileObj.push(e.target.files);
@@ -90,6 +92,7 @@ export class AddInventory extends Component {
             fd.append("orig_price",this.state.prc);
             fd.append("quantity",this.state.qty);
             fd.append("unit",this.state.unt);
+            fd.append("cond",this.state.cond);
             model.add(fd).then(res=>{
                 if(res.data.status===0){
                     this.setState({message:{
@@ -98,7 +101,7 @@ export class AddInventory extends Component {
                     }})
                     this.clear();
                 }else{
-                    this.setState({messaeg:{
+                    this.setState({message:{
                         msg:res.data.message,
                         cName:mess[0]
                     }})
@@ -115,13 +118,14 @@ export class AddInventory extends Component {
         }
     }
     render() {
-        
+        console.log()
         return (
             <div>
                 <button className="btn btn-primary" onClick={this.handleopen}>Add Item</button>
-        <Dialog open={this.state.open}  fullWidth={true} onClose={this.close}>
+        <Dialog open={this.state.open}  fullWidth={true} onClose={this.close} fullScreen={true}>
                 <DialogTitle>Add item in Inventory</DialogTitle>
                  <DialogContent>
+              
                    <div className="row">
                        <div className="col-md-4">
                           {(this.fileArray || []).map((val,index)=>(
@@ -144,14 +148,19 @@ export class AddInventory extends Component {
                                <label>Item Description</label>
                                 <textarea type="text" className="form-control" placeholder="Item Name" name="descp"  rows="4" onChange={this.onChange}/>
                            </div>
+                           <div className="form-group">
+                               <label>Item Condition</label>
+                                <select className="form-control" name="cond" onChange={this.onChange}>
+                                    <option value="Used">Used</option>
+                                    <option value="Slightly Used">Slightly Used</option>
+                                </select>
+                           </div>
                            <div className="row">
                             <div className="col-md-6">      
                                  <div className="form-group">
                                     <label>Item Category</label>
                                     <select className="form-control" name="catg" onChange={this.onChange}>
-                                        {ct.map((val,i)=>(
-                                            <option value={val} key={i}>{val}</option>
-                                        ))}
+                                            <Category/>
                                     </select>
                                 </div>
                               </div>

@@ -23,7 +23,10 @@ function AdminList() {
     const [q, setq] = useState("");
     const [isEmpty, setisEmpty] = useState(false);
     useEffect(() => {
-       getAdmins();
+        setInterval(() => {
+            getAdmins();    
+        }, 2000);
+        
     }, [open])
     const getAdmins = async() =>{
         const data = await model.adminlist("admin2").then(res=>{
@@ -64,6 +67,7 @@ function AdminList() {
                 setisload(false);
                 setmessage({msg:res.data.message,msgclas:mess[0]})
                 clear();
+                setisEmpty(false);
             }
         })
         
